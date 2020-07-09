@@ -1,0 +1,31 @@
+FROM alpine AS builder
+# Download QEMU, see https://github.com/docker/hub-feedback/issues/1261
+ENV QEMU_URL https://github.com/balena-io/qemu/releases/download/v4.0.0%2Bbalena2/qemu-4.0.0.balena2-arm.tar.gz
+RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
+
+FROM arm32v7/alpine:3
+
+# Add QEMU for multi-arch build
+COPY --from=builder qemu-arm-static /usr/bin
+
+RUN apk add --no-cache curl
+
+ENV BASE_URL="https://github.com/jedisct1/dnscrypt-proxy/releases"
+
+WORKDIR /opt/dnscrypt-proxy
+
+# Download the latest version
+RUN FILEVER=$(curl -sL $BASE_URL | grep -v beta | grep -Eo 'dnscrypt-proxy-linux_arm-[0-9.]+[0-9]' | sort -V | tail -n1) && \
+    echo "using $FILEVER" && \
+    VER=${FILEVER/dnscrypt-proxy-linux_arm-/} && \
+    curl -sLO $BASE_URL/download/$VER/${FILEVER}.tar.gz && \
+    tar --strip-components=1 -xvzf ${FILEVER}.tar.gz && \
+    rm ${FILEVER}.tar.gz
+
+RUN sed "s/^listen_addresses.*/listen_addresses = [':5300']/" example-dnscrypt-proxy.toml > dnscrypt-proxy.toml 
+
+EXPOSE 5300/tcp
+EXPOSE 5300/udp
+
+ENTRYPOINT ["/opt/dnscrypt-proxy/dnscrypt-proxy"]
+CMD ["-config", "/opt/dnscrypt-proxy/dnscrypt-proxy.toml"]
