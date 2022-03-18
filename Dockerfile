@@ -9,11 +9,14 @@ ENV URL "https://github.com/jedisct1/dnscrypt-proxy/releases/download/${VERSION}
 RUN apk update \
   && apk add curl 
 
-RUN curl -L ${URL} -o dnscrypt-proxy.tar.gz \
-&& tar xvfz dnscrypt-proxy.tar.gz \
-&& cp linux-${TARGETARCH}/dnscrypt-proxy . \
-&& cp linux-${TARGETARCH}/example-dnscrypt-proxy.toml . \
-&& sed "s/^listen_addresses.*/listen_addresses = [':5300']/" example-dnscrypt-proxy.toml > dnscrypt-proxy.toml 
+COPY get.sh .
+RUN sh get.sh
+
+#RUN curl -L ${URL} -o dnscrypt-proxy.tar.gz \
+#&& tar xvfz dnscrypt-proxy.tar.gz \
+#&& cp linux-${TARGETARCH}/dnscrypt-proxy . \
+#&& cp linux-${TARGETARCH}/example-dnscrypt-proxy.toml . \
+#&& sed "s/^listen_addresses.*/listen_addresses = [':5300']/" example-dnscrypt-proxy.toml > dnscrypt-proxy.toml 
 
 FROM alpine:3.14
 
