@@ -1,6 +1,6 @@
 FROM alpine:3.14 AS builder
 
-ENV VERSION "2.1.2"
+ENV VERSION "2.1.3"
 
 ARG TARGETARCH
 
