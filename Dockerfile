@@ -1,10 +1,10 @@
 FROM public.ecr.aws/docker/library/alpine:3.21 AS builder
 
-ARG VERSION "2.1.8"
+ARG VERSION="2.1.8"
 
 ARG TARGETARCH
 
-ENV URL "https://github.com/jedisct1/dnscrypt-proxy/releases/download/${VERSION}/dnscrypt-proxy-linux_${TARGETARCH}-${VERSION}.tar.gz"
+ARG URL="https://github.com/jedisct1/dnscrypt-proxy/releases/download/${VERSION}/dnscrypt-proxy-linux_${TARGETARCH}-${VERSION}.tar.gz"
 
 RUN apk update \
   && apk add curl 
