@@ -1,6 +1,6 @@
-FROM alpine:3.20 AS builder
+FROM public.ecr.aws/docker/library/alpine:3.21 AS builder
 
-ENV VERSION "2.1.7"
+ENV VERSION "2.1.8"
 
 ARG TARGETARCH
 
@@ -18,7 +18,7 @@ RUN sh get.sh
 #&& cp linux-${TARGETARCH}/example-dnscrypt-proxy.toml . \
 #&& sed "s/^listen_addresses.*/listen_addresses = [':5300']/" example-dnscrypt-proxy.toml > dnscrypt-proxy.toml 
 
-FROM alpine:3.14
+FROM public.ecr.aws/docker/library/alpine:3.21
 
 WORKDIR /opt/dnscrypt-proxy
 
