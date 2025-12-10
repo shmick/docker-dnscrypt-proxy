@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/alpine:3.23 AS builder
+FROM public.ecr.aws/docker/library/alpine:3.22 AS builder
 
 ARG VERSION="2.1.15"
 
@@ -7,12 +7,12 @@ ARG TARGETARCH
 ARG URL="https://github.com/jedisct1/dnscrypt-proxy/releases/download/${VERSION}/dnscrypt-proxy-linux_${TARGETARCH}-${VERSION}.tar.gz"
 
 RUN apk update \
-  && apk add --no-cache curl 
+  && apk add curl 
 
 COPY get.sh .
 RUN sh get.sh
 
-FROM public.ecr.aws/docker/library/alpine:3.23
+FROM public.ecr.aws/docker/library/alpine:3.22
 
 WORKDIR /opt/dnscrypt-proxy
 
