@@ -7,7 +7,7 @@ ARG TARGETARCH
 ARG URL="https://github.com/jedisct1/dnscrypt-proxy/releases/download/${VERSION}/dnscrypt-proxy-linux_${TARGETARCH}-${VERSION}.tar.gz"
 
 RUN apk update \
-  && apk add curl 
+  && apk add --no-cache curl 
 
 COPY get.sh .
 RUN sh get.sh
