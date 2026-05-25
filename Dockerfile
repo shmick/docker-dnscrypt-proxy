@@ -1,6 +1,6 @@
 FROM public.ecr.aws/docker/library/alpine:3.22 AS builder
 
-ARG VERSION="2.1.15"
+ARG VERSION="2.1.16"
 
 ARG TARGETARCH
 
