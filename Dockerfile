@@ -1,6 +1,6 @@
-FROM public.ecr.aws/docker/library/alpine:3.22 AS builder
+FROM public.ecr.aws/docker/library/alpine:3.24 AS builder
 
-ARG VERSION="2.1.16"
+ARG VERSION="2.1.17"
 
 ARG TARGETARCH
 
@@ -12,7 +12,7 @@ RUN apk update \
 COPY get.sh .
 RUN sh get.sh
 
-FROM public.ecr.aws/docker/library/alpine:3.22
+FROM public.ecr.aws/docker/library/alpine:3.24
 
 WORKDIR /opt/dnscrypt-proxy
 
