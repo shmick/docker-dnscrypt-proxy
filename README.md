@@ -1,5 +1,5 @@
 # dnscrypt-proxy
-A lightweight container image of [dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy) with support for armv7, arm64 and amd64
+A lightweight container image of [dnscrypt-proxy](https://github.com/DNSCrypt/dnscrypt-proxy) with support for armv7, arm64 and amd64
 
 ### Listens on port 5300
 
