@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -x
 export BUILDARCH=$TARGETARCH
 
 if [ "$TARGETARCH" = "amd64" ] 
