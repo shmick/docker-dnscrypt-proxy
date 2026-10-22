@@ -6,7 +6,7 @@ if [ "$TARGETARCH" = "amd64" ]
 then export BUILDARCH="x86_64" 
 fi
 
-export URL="https://github.com/jedisct1/dnscrypt-proxy/releases/download/${VERSION}/dnscrypt-proxy-linux_${BUILDARCH}-${VERSION}.tar.gz"
+export URL="https://github.com/DNSCrypt/dnscrypt-proxy/releases/download/${VERSION}/dnscrypt-proxy-linux_${BUILDARCH}-${VERSION}.tar.gz"
 
 curl -L ${URL} -o dnscrypt-proxy.tar.gz \
 && tar xvfz dnscrypt-proxy.tar.gz \
